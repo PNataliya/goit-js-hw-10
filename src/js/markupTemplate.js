@@ -3,7 +3,7 @@ export function countryСardTeemplate({
   name,
   capital,
   population,
-  languages,
+  lang,
 }) {
   return `
     <div class="country-info__container">
@@ -16,7 +16,7 @@ export function countryСardTeemplate({
       <p class="country-info__capital"><span class="country-info__weight">Capital:</span> ${capital}</p>
       <p class="country-info__population"><span class="country-info__weight">Population:</span> ${population}</p>
       <p class="country-info__languages"><span class="country-info__weight">Languages:</span> ${Object.values(
-        languages
+        lang
       )}</p>
     </div>
   `;

@@ -38,7 +38,7 @@ function onInputCountry() {
         refs.countryInfo.innerHTML = '';
       }
 
-      if (countrys.length === 1) {
+      if (countrys.length === 2) {
         const markup = countrys.map(country => countryСardTeemplate(country));
         refs.countryInfo.innerHTML = markup.join('');
         refs.countryList.innerHTML = '';
