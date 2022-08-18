@@ -30,7 +30,7 @@ function onInputCountry() {
         return;
       }
 
-      if (countrys.length <= 10) {
+      if (countrys.length >= 2 && countrys.length <= 10) {
         const listMarkup = countrys.map(country =>
           countryListTemplate(country)
         );
@@ -38,7 +38,7 @@ function onInputCountry() {
         refs.countryInfo.innerHTML = '';
       }
 
-      if (countrys.length === 2) {
+      if (countrys.length === 1) {
         const markup = countrys.map(country => countryСardTeemplate(country));
         refs.countryInfo.innerHTML = markup.join('');
         refs.countryList.innerHTML = '';
