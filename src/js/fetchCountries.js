@@ -1,9 +1,10 @@
-export async function fetchCountries(name) {
+export function fetchCountries(name) {
   const url = 'https://restcountries.com/v3.1/name/';
   const filter = '?fields=name,capital,population,flags,lang';
-  const response = await fetch(`${url}${name}${filter}`);
-  if (!response.ok) {
-    throw new Error(response.status);
-  }
-  return await response.json();
+  return fetch(`${url}${name}${filter}`).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
+    return response.json();
+  });
 }
