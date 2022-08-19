@@ -11,25 +11,26 @@ refs.searchBox.addEventListener(
   debounce(onInputCountry, DEBOUNCE_DELAY)
 );
 
-function onInputCountry() {
-  const countryName = refs.searchBox.value;
+function onInputCountry(e) {
+  e.preventDefault();
+  const countryName = refs.searchBox.value.trim();
   if (countryName === '') {
-    refs.countryInfo.innerHTML = '';
-    refs.countryList.innerHTML = '';
+    clearData();
     return;
   }
 
   fetchCountries(countryName)
     .then(countrys => {
+      //Если в ответе бэкенд вернул больше чем 10 стран, в интерфейсе пояляется уведомление о том, что имя должно быть более специфичным.
       if (countrys.length > 10) {
         Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
-        refs.countryInfo.innerHTML = '';
-        refs.countryList.innerHTML = '';
+        clearData();
         return;
       }
 
+      //Если бэкенд вернул от 2-х до 10-х стран, под тестовым полем отображается список найденных стран. Каждый элемент списка состоит из флага и имени страны.
       if (countrys.length >= 2 && countrys.length <= 10) {
         const listMarkup = countrys.map(country =>
           countryListTemplate(country)
@@ -46,8 +47,12 @@ function onInputCountry() {
     })
     .catch(error => {
       Notify.failure('Oops, there is no country with that name');
-      refs.countryInfo.innerHTML = '';
-      refs.countryList.innerHTML = '';
+      clearData();
       return error;
     });
+}
+
+function clearData() {
+  refs.countryInfo.innerHTML = '';
+  refs.countryList.innerHTML = '';
 }
