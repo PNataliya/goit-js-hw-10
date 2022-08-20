@@ -20,9 +20,9 @@ function onInputCountry(e) {
   }
 
   fetchCountries(countryName)
-    .then(countries => {
+    .then(countrys => {
       //Если в ответе бэкенд вернул больше чем 10 стран, в интерфейсе пояляется уведомление о том, что имя должно быть более специфичным.
-      if (countries.length > 10) {
+      if (countrys.length > 10) {
         Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
@@ -31,16 +31,16 @@ function onInputCountry(e) {
       }
 
       //Если бэкенд вернул от 2-х до 10-х стран, под тестовым полем отображается список найденных стран. Каждый элемент списка состоит из флага и имени страны.
-      if (countries.length >= 2 && countries.length <= 10) {
-        const listMarkup = countries.map(country =>
+      if (countrys.length >= 2 && countrys.length <= 10) {
+        const listMarkup = countrys.map(country =>
           countryListTemplate(country)
         );
         refs.countryList.innerHTML = listMarkup.join('');
         refs.countryInfo.innerHTML = '';
       }
 
-      if (countries.length === 1) {
-        const markup = countries.map(country => countryСardTeemplate(country));
+      if (countrys.length === 1) {
+        const markup = countrys.map(country => countryСardTeemplate(country));
         refs.countryInfo.innerHTML = markup.join('');
         refs.countryList.innerHTML = '';
       }
